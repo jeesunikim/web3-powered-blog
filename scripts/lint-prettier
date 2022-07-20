@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [ $# -ge 1 ]
+then
+  files=$@
+else
+  files="prettier.config.js components/**/*.js components/**/*.tsx helpers/**/*.js helpers/**/*.tsx hooks/**/*.tsx styles/**/*.css posts/**/*.md *.md"
+fi
+
+prettier --config --check $files

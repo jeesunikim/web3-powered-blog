@@ -1,0 +1,22 @@
+[
+    {
+        "id": 0,
+        "name": "Weekly planner",
+        "description": "A printable for you to plan your week from 7 am to 11 pm, list out important to-do's, weekly priorities. Includes a space for notes.",
+        "price": {
+            "asset": "USD",
+            "value": 5
+        },
+        "image":"/shop-goodmondays-example.jpg"
+    },
+    {
+        "id": 1,
+        "name": "Daily planner",
+        "description": "A printable for you to plan your day from 7AM to 12AM, keep track of your to-dos and meals, plus space for notes.",
+        "price": {
+            "asset": "USD",
+            "value": 5
+        },
+        "image":"/shop-goodmondays-example.jpg"
+    }
+]
