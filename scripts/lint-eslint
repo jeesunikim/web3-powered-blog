@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [ $# -ge 1 ]
+then
+  files=$@
+else
+  files="components/ helpers/ hooks/ styles/ posts/ lib/ pages/"
+fi
+
+eslint --ext js,ts,tsx --max-warnings 0 $files
