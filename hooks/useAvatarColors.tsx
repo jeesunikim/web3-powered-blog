@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
 import { getAvatarColors } from "helpers/getAvatarColors";
 
 import { useEnsAvatar } from "hooks/useEnsAvatar";

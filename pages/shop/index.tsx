@@ -21,7 +21,7 @@ const Shop: React.FC = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <Layout isHome={false}>
+    <Layout>
       <Head>
         <title>Digital Planner Shop</title>
       </Head>

@@ -18,12 +18,12 @@ export default function Post({
   };
 }) {
   return (
-    <Layout isHome={false}>
+    <Layout>
       <Head>
         <title>{postData.title}</title>
       </Head>
-      <article>
-        <h1 className={utilStyles.headingXl}>{postData.title}</h1>
+      <article className="prose lg:prose-xl">
+        <h2 className="text-3xl font-bold text-orange-300">{postData.title}</h2>
         <div className={utilStyles.lightText}>
           <Date dateString={postData.date} />
         </div>

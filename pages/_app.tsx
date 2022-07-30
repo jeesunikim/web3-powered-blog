@@ -3,6 +3,8 @@ import "@rainbow-me/rainbowkit/styles.css";
 
 import { AppProps } from "next/app";
 import { Provider } from "react-redux";
+import React from "react";
+
 import {
   getDefaultWallets,
   RainbowKitProvider,
@@ -32,16 +34,17 @@ const wagmiClient = createClient({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <Provider store={store}>
-      <WagmiConfig client={wagmiClient}>
-        <RainbowKitProvider
-          chains={chains}
-          theme={darkTheme()}
-          avatar={RainbowCustomAvatar}
-        >
+    <WagmiConfig client={wagmiClient}>
+      <RainbowKitProvider
+        coolMode
+        chains={chains}
+        theme={darkTheme()}
+        avatar={RainbowCustomAvatar}
+      >
+        <Provider store={store}>
           <Component {...pageProps} />
-        </RainbowKitProvider>
-      </WagmiConfig>
-    </Provider>
+        </Provider>
+      </RainbowKitProvider>
+    </WagmiConfig>
   );
 }

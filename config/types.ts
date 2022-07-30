@@ -1,5 +1,6 @@
 import BigNumber from "bignumber.js";
 import { AssetType } from "stellar-base";
+import { Network } from "@alch/alchemy-sdk";
 
 export interface StellarAssetIssuer {
   key: string;
@@ -31,5 +32,40 @@ export type SiteConfig = {
   };
   // ETH Related
   // Polygon Related
-  // Tezos Related
+};
+
+export type AlchemyConfig = {
+  apiKey?: string;
+  network?: Network.ETH_MAINNET | Network.MATIC_MAINNET;
+  maxRetries: number;
+};
+
+export interface AlchemyNFTsInfo {
+  balance: number;
+  contract: { address: string };
+  description: string;
+  media: Array<any>;
+  metadataError: any;
+  rawMetadata: any;
+  timeLastUpdated: string;
+  title: string;
+  tokenId: string;
+  tokenType: string;
+  tokenUri: any;
+}
+
+export interface BloggerNFTsInfoMapping {
+  title: string;
+  description: string;
+  topics: string[];
+}
+
+export interface BloggerNFTsInfo {
+  [contract: string]: BloggerNFTsInfoMapping;
+}
+
+export type SharedNFTsInfo = {
+  title: string;
+  tokenId: string;
+  contract: { address: string };
 };
