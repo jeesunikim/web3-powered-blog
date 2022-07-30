@@ -13,7 +13,7 @@ const withMDX = require("@next/mdx")({
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["ipfs.io", "storage.googleapis.com"],
+    domains: ["ipfs.io"],
   },
 };
 
