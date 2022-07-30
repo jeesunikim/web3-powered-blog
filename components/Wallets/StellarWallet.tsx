@@ -1,5 +1,3 @@
-import utilStyles from "styles/utils.module.css";
-
 import React, { useEffect, useState } from "react";
 import { isConnected } from "@stellar/freighter-api";
 import Image from "next/image";
@@ -28,19 +26,27 @@ export const StellarWallet: React.FC = () => {
   };
 
   return (
-    <div className={utilStyles.buttonStellarWallet}>
-      <Image src="/stellar.png" width={20} height={17} alt="Stellar Logo" />
-      {publicKey ? (
-        <div>
+    <div className="flex mr-9 p-2 rounded-2xl border-black border-2 ">
+      <div className="pr-1.5 self-center flex-col">
+        <Image
+          className="align-self-center"
+          src="/stellar-black.png"
+          width={20}
+          height={17}
+          alt="Stellar Logo"
+        />
+      </div>
+      <div className="text-black font-serif text-base font-semibold">
+        {publicKey ? (
           <span>{shortenStellarAddress(publicKey)}</span>
-        </div>
-      ) : hasFreighter && !publicKey ? (
-        <button onClick={() => onConnectToFreighter()}>
-          <span>Connect with Freighter to Shop</span>
-        </button>
-      ) : (
-        <div>Download Stellar Wallet</div>
-      )}
+        ) : hasFreighter && !publicKey ? (
+          <button onClick={() => onConnectToFreighter()}>
+            <span>shop with Stellar</span>
+          </button>
+        ) : (
+          <span>Download Stellar Wallet</span>
+        )}
+      </div>
     </div>
   );
 };

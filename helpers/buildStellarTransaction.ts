@@ -25,15 +25,10 @@ export const buildStellarTransaction = async ({
   let timebounds: Server.Timebounds;
   const server = new Server(config.stellarHorizonUrl);
 
-  console.log("sourceAccount:", sourceAccount);
-
   [latestAccount, timebounds] = await Promise.all([
     server.loadAccount(sourceAccount),
     server.fetchTimebounds(60 * 5),
   ]);
-
-  console.log("latestAccount:", latestAccount);
-  console.log("timebounds", timebounds);
 
   const transaction = new TransactionBuilder(latestAccount, {
     fee: BASE_FEE,
@@ -49,8 +44,6 @@ export const buildStellarTransaction = async ({
     )
     .addMemo(Memo.text("Shopping Transaction Example"))
     .build();
-
-  console.log("transaction: ", transaction);
 
   return transaction;
 };

@@ -9,6 +9,7 @@ export const useEnsAvatar = () => {
   const { data: ensName } = useEnsName({
     address: address,
   });
+
   const { data: ensAvatar } = wagmiUseEnsAvatar({
     addressOrName: ensName || undefined,
   });

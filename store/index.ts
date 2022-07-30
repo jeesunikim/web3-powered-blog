@@ -2,9 +2,15 @@ import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 
 import { reducer as paymentReducer } from "store/slices/paymentSlice";
+import { reducer as userWalletSettingReducer } from "store/slices/userWalletSettingSlice";
+import { reducer as blogSettingReducer } from "store/slices/blogSettingSlice";
 
 export const store = configureStore({
-  reducer: { payment: paymentReducer },
+  reducer: {
+    payment: paymentReducer,
+    userWalletSetting: userWalletSettingReducer,
+    blogSetting: blogSettingReducer,
+  },
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

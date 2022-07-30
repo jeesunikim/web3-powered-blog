@@ -1,43 +1,37 @@
-import styles from "styles/layout.module.css";
-
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Head from "next/head";
+// import { useSelector } from "react-redux";
 
-import { useAccount } from "wagmi";
+import { useSetupReaderWalletsSetting } from "hooks/useSetupReaderWalletsSetting";
 
-import { useAvatarColors } from "hooks/useAvatarColors";
-
-import { ConnectButtons } from "components/ConnectButtons";
 import { Header } from "components/Header";
 import { Footer } from "components/Footer";
+
+// import { selectEnsAvatarColors } from "store/slices/userWalletSettingSlice";
 
 export const siteTitle = "codeandfood";
 
 type LayoutProps = {
   children: React.ReactNode;
-  isHome: boolean;
 };
 
-export const Layout: React.FC<LayoutProps> = ({ children, isHome }) => {
-  const { isConnected } = useAccount();
-  const avatarColorsArray = useAvatarColors();
+export const Layout: React.FC<LayoutProps> = ({ children }) => {
+  // Setup User's Connected Wallet's Setting
+  useSetupReaderWalletsSetting();
 
-  const [backgroundColor, setBackgroundColor] = useState("");
-
-  useEffect(() => {
-    if (isConnected && avatarColorsArray?.length) {
-      setBackgroundColor(
-        `linear-gradient(45deg, ${avatarColorsArray[0]}, ${avatarColorsArray[1]},${avatarColorsArray[2]})`,
-      );
-    } else {
-      setBackgroundColor("none");
-    }
-  }, [isConnected, avatarColorsArray]);
+  // const ensAvatarColors = useSelector(selectEnsAvatarColors);
+  // const hasEnsAvatarColors = Boolean(ensAvatarColors?.length);
 
   return (
-    <div className={styles.body} style={{ backgroundImage: backgroundColor }}>
-      <ConnectButtons />
-      <div className={styles.container}>
+    <div
+      className="bg-slate-50 min-h-screen"
+      // style={{
+      //   backgroundImage: hasEnsAvatarColors
+      //     ? `linear-gradient(45deg, ${ensAvatarColors[0]}, ${ensAvatarColors[1]},${ensAvatarColors[2]})`
+      //     : "none",
+      // }}
+    >
+      <div className="py-6 md:container md:mx-auto min-w-full:px-12">
         <Head>
           <link
             rel="icon"
@@ -56,8 +50,8 @@ export const Layout: React.FC<LayoutProps> = ({ children, isHome }) => {
           <meta name="og:title" content={siteTitle} />
           <meta name="twitter:card" content="summary_large_image" />
         </Head>
-        <Header isHome={isHome} />
-        <main>{children}</main>
+        <Header />
+        <main className="mt-8">{children}</main>
       </div>
       <Footer />
     </div>
