@@ -1,5 +1,3 @@
-import animStyles from "styles/animation.module.css";
-
 import React, { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useAccount, useEnsName } from "wagmi";
