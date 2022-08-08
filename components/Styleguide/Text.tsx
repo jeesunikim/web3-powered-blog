@@ -6,12 +6,6 @@ type TextProps = {
   className?: string;
 };
 
-type SocialMediaLinkPops = {
-  children: React.ReactNode;
-  href: string;
-  socialMedia: string;
-};
-
 export const H2: React.FC<TextProps> = ({ children, className = "" }) => (
   <h2 className={`${className} text-2xl font-serif font-semibold mb-3 md:mx-5`}>
     {children}

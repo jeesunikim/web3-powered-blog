@@ -1,6 +1,7 @@
 import { GetStaticProps, GetStaticPaths } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import Image from "next/image";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 
 import { getAllPostIds, getPostData } from "lib/posts";
@@ -58,7 +59,6 @@ export default function Post({
           {...postData.mdxSource}
           components={{
             ...components,
-            SocialMediaLink,
             Image,
             Link,
           }}
