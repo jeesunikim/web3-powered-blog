@@ -7,8 +7,7 @@
     "lint": "concurrently 'next lint' 'yarn lint:eslint' 'yarn lint:ts' 'yarn lint:prettier'",
     "lint:eslint": "./scripts/lint-eslint",
     "lint:prettier": "./scripts/lint-prettier",
-    "lint:ts": "tsc",
-    "postinstall": "husky install"
+    "lint:ts": "tsc"
   },
   "dependencies": {
     "@alch/alchemy-sdk": "^1.2.0",
