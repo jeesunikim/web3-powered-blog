@@ -68,18 +68,12 @@ const ConnectedWalletInfo: React.FC<ConnectedWalletInfoProps> = ({
       {ensName ? (
         <p className="text-3xl font-serif font-semibold pb-6 relative">
           Hello,
-          <span
-            className={`${animStyles.walletAddress} font-bold absolute pl-3`}
-          >
-            {ensName}
-          </span>
+          <span className="font-bold absolute pl-3">{ensName}</span>
         </p>
       ) : (
         <>
           <p className="text-3xl font-serif font-semibold relative">Hello,</p>
-          <p
-            className={`${animStyles.walletAddress} font-bold relative text-lg leading-8`}
-          >
+          <p className="font-bold relative text-lg leading-8">
             {address || ""}
           </p>
         </>

@@ -43,7 +43,7 @@ export const BlogThumbnail: React.FC<BlogThumbnailProps> = ({
                 src={image}
                 width={566}
                 height={IMAGE_HEIGHT_DESKTOP}
-                alt="Ze'ev"
+                alt={`${blogTitle} blog image`}
               />
             ) : (
               <div
