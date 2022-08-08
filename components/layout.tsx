@@ -5,7 +5,6 @@ import { useSetupReaderWalletsSetting } from "hooks/useSetupReaderWalletsSetting
 
 import { MobileHeader } from "components/MobileHeader";
 import { DesktopHeader } from "components/DesktopHeader";
-import { Footer } from "components/Footer";
 
 export const siteTitle = "@TODO your site title";
 

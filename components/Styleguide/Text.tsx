@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 
 type TextProps = {
   children: React.ReactNode;
