@@ -1,45 +1,4 @@
-.shopContainer {
-    grid-template-columns: 50px 50px 50px 50px;
-    grid-template-rows: auto;
-}
-
-.shopContainer section{
-    display: flex;
-    margin: 0 auto;
-}
-
-.shopProduct img {
-    cursor: pointer;
-    transition: transform .2s;
-}
-
-.shopProduct:hover img {
-    transform: scale(1.25);
-}
-
-.shopProductList {
-    display:flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.shopProductContent {
-    /* display: flex; */
-    /* flex-direction: column; */
-    padding: 0 20px;
-    align-self: flex-start;
-}
-
-.shopProductContent span, .shopProductContent h2 {
-    margin: 0;
-    color: #fff;
-}
-
-.shopProductContent p {
-    font-size: 16px;
-}
-
-.shopProductContent button {
+.shopButton {
     background-color: #5114c4;
     border: none;
     color: white;

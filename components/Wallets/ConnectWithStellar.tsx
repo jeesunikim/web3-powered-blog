@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { isConnected } from "@stellar/freighter-api";
 import Image from "next/image";
+import Link from "next/link";
 
 import { getFreighterPublicKey } from "helpers/getFreighterPublicKey";
 import { shortenStellarAddress } from "helpers/shortenStellarAddress";
 
-export const StellarWallet: React.FC = () => {
+export const ConnectWithStellar: React.FC = () => {
   const [hasFreighter, checkHasFreighter] = useState<Boolean>(false);
   const [publicKey, getPublicKey] = useState<string>("");
 
@@ -26,8 +27,8 @@ export const StellarWallet: React.FC = () => {
   };
 
   return (
-    <div className="flex mr-9 p-2 rounded-2xl border-black border-2 ">
-      <div className="pr-1.5 self-center flex-col">
+    <div className="flex justify-center mr-9 mt-3 p-2 rounded-2xl border-black border-2 w-56 md:justify-self-end md:mt-0">
+      <div className="pr-1.5 self-center flex-col flex">
         <Image
           className="align-self-center"
           src="/stellar-black.png"
@@ -36,15 +37,19 @@ export const StellarWallet: React.FC = () => {
           alt="Stellar Logo"
         />
       </div>
-      <div className="text-black font-serif text-base font-semibold">
+      <div className="text-black text-base font-semibold items-center">
         {publicKey ? (
           <span>{shortenStellarAddress(publicKey)}</span>
         ) : hasFreighter && !publicKey ? (
           <button onClick={() => onConnectToFreighter()}>
-            <span>shop with Stellar</span>
+            <span>connect with Freighter</span>
           </button>
         ) : (
-          <span>Download Stellar Wallet</span>
+          <Link href="https://www.freighter.app/">
+            <a className="no-underline" target="_blank" rel="noreferrer">
+              Download Stellar Wallet
+            </a>
+          </Link>
         )}
       </div>
     </div>

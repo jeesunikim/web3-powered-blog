@@ -1,6 +1,7 @@
+import animStyles from "styles/animation.module.css";
+
 import React, { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import AnimateHeight from "react-animate-height";
 import { useAccount, useEnsName } from "wagmi";
 import { useAppDispatch } from "store";
 
@@ -13,11 +14,6 @@ import {
   selectUserOwnedNFTs,
 } from "store/slices/userWalletSettingSlice";
 import { setSharedTopics } from "store/slices/blogSettingSlice";
-
-const DEFAULT_DIV_HEIGHT = 208;
-const EXPANDED_ETH_DIV_HEIGHT = 500;
-const EXPANDED_POLYGON_DIV_HEIGHT = 820;
-const DIV_EXPANSION_SPEED = 500;
 
 type ConnectedWalletInfoProps = {
   userOwnedNfts: AlchemyNFTsInfo[];
@@ -36,8 +32,6 @@ const ConnectedWalletInfo: React.FC<ConnectedWalletInfoProps> = ({
   const { data: ensName } = useEnsName({
     address: address,
   });
-
-  const GENERIC_ADDRESSED_USER_COPY = `Hello, ${ensName || address},`;
 
   const getCommonNFTs = useCallback(() => {
     return userOwnedNfts.filter(({ contract }: AlchemyContractInfo) => {
@@ -69,58 +63,73 @@ const ConnectedWalletInfo: React.FC<ConnectedWalletInfoProps> = ({
     }
   }, [dispatch, hasCommonNFTs, getCommonNFTs]);
 
-  return (
-    <>
-      {hasCommonNFTs ? (
-        <div>
-          <p className="font-serif font-normal text-2xl pb-6">
-            {GENERIC_ADDRESSED_USER_COPY}
-            <br />
-            we both share{" "}
-            <span className="font-mono font-bold text-xl">
-              {userOwnedNfts.length}
-            </span>{" "}
-            NFTs
-          </p>
-          <p className="font-serif font-normal text-xl pb-3">
-            My most active ones are:
-          </p>
-          <ul>
-            {getCommonNFTs().map(
-              ({ title, tokenId, contract }: SharedNFTsInfo) => (
-                <li key={`${contract.address}+${tokenId}`}>
-                  <h2 className="font-mono font-bold text-base text-black pb-2">
-                    {title.split("#")[0]} (I’m #{tokenId})
-                  </h2>
-                  <p className="font-mono font-medium	text-sm leading-relaxed pb-4">
-                    {Object.values(blogger_nfts[contract.address]?.description)}
-                  </p>
-                </li>
-              ),
-            )}
-          </ul>
-        </div>
+  return hasCommonNFTs ? (
+    <div>
+      {ensName ? (
+        <p className="text-3xl font-serif font-semibold pb-6 relative">
+          Hello,
+          <span
+            className={`${animStyles.walletAddress} font-bold absolute pl-3`}
+          >
+            {ensName}
+          </span>
+        </p>
       ) : (
-        <div>
-          <p className="font-serif font-semibold text-2xl pb-6">
-            {GENERIC_ADDRESSED_USER_COPY}
-            <br />
-            we don’t share any NFTs together
+        <>
+          <p className="text-3xl font-serif font-semibold relative">Hello,</p>
+          <p
+            className={`${animStyles.walletAddress} font-bold relative text-lg leading-8`}
+          >
+            {address || ""}
           </p>
-          <p className="font-mono font-bold text-base pb-6">
-            Which NFTs are your favorite?
-            <br />
-            Let me know 😊
-          </p>
-        </div>
+        </>
       )}
-    </>
+
+      <p className="text-2xl font-serif font-normal py-6 relative">
+        we both share{" "}
+        <span className="font-mono font-bold text-xl">
+          {userOwnedNfts.length}
+        </span>{" "}
+        NFTs
+      </p>
+      <p className="font-serif font-normal text-xl pb-3">
+        My most active ones are:
+      </p>
+      <ul className="md:pr-6">
+        {getCommonNFTs().map(({ title, tokenId, contract }: SharedNFTsInfo) => (
+          <li key={`${contract.address}+${tokenId}`}>
+            <h2 className="font-mono font-bold text-base text-black pb-2">
+              {title.split("#")[0]} (I’m #{tokenId})
+            </h2>
+            <p className="font-mono font-normal	text-sm leading-relaxed pb-4">
+              {Object.values(blogger_nfts[contract.address]?.description)}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ) : (
+    <div>
+      <p className="font-serif font-semibold pb-6">
+        {ensName ? (
+          <span className="text-2xl">{ensName}</span>
+        ) : (
+          <span className="text-xl">{address || ""}</span>
+        )}
+        <br />
+        we don’t share any NFTs together
+      </p>
+      <p className="font-mono font-bold text-base pb-6">
+        Which NFTs are your favorite?
+        <br />
+        Let me know 😊
+      </p>
+    </div>
   );
 };
 
 export const BlogWalletInfo: React.FC = () => {
   const [isWalletConnected, checkIsWalletConnected] = useState<Boolean>(false);
-  const [height, setHeight] = useState(DEFAULT_DIV_HEIGHT);
 
   const userOwnedNfts = useSelector(selectUserOwnedNFTs);
   const isEthWalletEnabled = useSelector(selectIsEthWalletEnabled);
@@ -137,56 +146,27 @@ export const BlogWalletInfo: React.FC = () => {
     }
   }, [isEthWalletEnabled, isPolygonWalletEnabled]);
 
-  useEffect(() => {
-    if (isEthWalletEnabled) {
-      setHeight(EXPANDED_ETH_DIV_HEIGHT);
-    } else if (isPolygonWalletEnabled) {
-      setHeight(EXPANDED_POLYGON_DIV_HEIGHT);
-    } else if (isWalletConnected && !hasSharedNFTs) {
-      setHeight(DEFAULT_DIV_HEIGHT);
-    } else {
-      setHeight(DEFAULT_DIV_HEIGHT);
-    }
-  }, [
-    isEthWalletEnabled,
-    isWalletConnected,
-    isPolygonWalletEnabled,
-    hasSharedNFTs,
-    height,
-  ]);
-
-  return (
+  return isWalletConnected ? (
+    <ConnectedWalletInfo
+      hasSharedNFTs={hasSharedNFTs}
+      userOwnedNfts={userOwnedNfts}
+    />
+  ) : (
     <>
-      <AnimateHeight
-        height={height}
-        duration={DIV_EXPANSION_SPEED}
-        className="border-l-2 border-black pl-5 py-3 "
-      >
-        {isWalletConnected ? (
-          <ConnectedWalletInfo
-            hasSharedNFTs={hasSharedNFTs}
-            userOwnedNfts={userOwnedNfts}
-          />
-        ) : (
-          <>
-            <p className="font-serif font-semibold text-2xl pb-6">
-              Hello,
-              <br /> please connect to your wallet for customized experience
-              <sup>*</sup>
-            </p>
+      <p className="font-serif font-semibold text-3xl pb-6">
+        Hello,
+        <br /> please connect to your wallet for customized experience
+        <sup>*</sup>
+      </p>
 
-            <div>
-              <p className="font-serif text-sm">
-                <sup>*</sup>no worries if you don’t have a wallet
-              </p>
-              <p className="font-serif text-sm">
-                <sup>*</sup>we don’t store your information b/c it’s public
-                anyway
-              </p>
-            </div>
-          </>
-        )}
-      </AnimateHeight>
+      <div>
+        <p className="font-serif text-xs">
+          <sup>*</sup> no worries if you don’t have a wallet
+        </p>
+        <p className="font-serif text-xs">
+          <sup>*</sup> I don’t store your information b/c it’s public anyway
+        </p>
+      </div>
     </>
   );
 };

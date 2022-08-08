@@ -21,6 +21,9 @@ module.exports = {
         ],
         mono: ["IBM Plex Mono", ...defaultTheme.fontFamily.mono],
       },
+      height: {
+        image: "38rem",
+      },
     },
   },
   plugins: [],

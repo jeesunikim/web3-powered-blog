@@ -36,13 +36,6 @@ article img {
     padding: 1em 2em;
 }
 
-article h2 {
-    font-size: 1.5rem;
-    line-height: 2rem;
-    font-family: serif;
-    color: rgb(253, 186, 116)
-}
-
 article p {
     margin: 1em 0;
 }
@@ -54,7 +47,7 @@ pre {
     line-height: 1.25rem;
 }
 
-code {
+pre code {
     color: #ffe600;
 }
 
@@ -68,4 +61,11 @@ input[type="reset"] {
     font: inherit;
     cursor: pointer;
     outline: inherit;
+}
+
+ul li p {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    padding-right: 0;
+    padding-left: 0;
 }
