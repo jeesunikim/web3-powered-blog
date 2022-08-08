@@ -1,0 +1,13 @@
+/* ENS underline 
+https: //codepen.io/Wking/pen/BdmpVx */
+
+.dramaticUnderline {
+    background-repeat: no-repeat;
+    background-size: 100% 0.2em;
+    background-position: 0 100%;
+    transition: background-size 0.25s ease-in
+}
+
+.dramaticUnderline:hover{
+    background-size: 100% 100%;
+}

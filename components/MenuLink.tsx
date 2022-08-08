@@ -3,12 +3,12 @@ import Link from "next/link";
 
 type MenuLinkProps = {
   href: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 export const MenuLink: React.FC<MenuLinkProps> = ({ href, children }) => (
   <Link href={href}>
-    <a className="mr-24 no-underline font-serif font-normal text-lg">
+    <a className="no-underline text-center font-serif font-normal text-4xl lg:mr-24 lg:text-lg lg:text-left">
       {children}
     </a>
   </Link>

@@ -89,10 +89,16 @@ export const useSetupReaderWalletsSetting = () => {
   }, [isConnected, isPolygonWalletEnabled, hasEnsAvatarColors, dispatch]);
 
   useEffect(() => {
-    if (isConnected && alchemy && address) {
+    if (
+      isConnected &&
+      (isPolygonWalletEnabled || isEthWalletEnabled) &&
+      alchemy &&
+      address
+    ) {
       getNftsForOwner(alchemy, address).then(({ ownedNfts }) => {
         dispatch(setUserOwnedNFTs(ownedNfts));
       });
     }
-  }, [isConnected, address]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isConnected, address, isPolygonWalletEnabled, isEthWalletEnabled]);
 };

@@ -1,0 +1,49 @@
+.hamburgerMenu {
+    position: relative;
+    width: 23px;
+    height: 17px;
+    align-self: center;
+    cursor: pointer;
+}
+
+.hamburger {
+    transition: all 0.16s ease-out;
+    -moz-transition: all 0.16s ease-out;
+    -o-transition: all 0.16s ease-out;
+    -webkit-transition: all 0.16s ease-out;
+    width: 100%;
+    position: absolute;
+    height: 2px;
+    width: 23px;
+    margin-bottom: 5px;
+    display: block;
+    background-color: #000;
+    right: 0;
+}
+
+.hamburger_white {
+    transition: all 0.16s ease-out;
+    -moz-transition: all 0.16s ease-out;
+    -o-transition: all 0.16s ease-out;
+    -webkit-transition: all 0.16s ease-out;
+    width: 100%;
+    position: absolute;
+    height: 2px;
+    width: 23px;
+    margin-bottom: 5px;
+    display: block;
+    background-color: rgb(241 245 249);
+    right: 0;
+}
+
+.hamburgerTop {
+    top: 0;
+}
+
+.hamburgerMiddle {
+    top: 7px;
+}
+
+.hamburgerBottom {
+    top: 15px;
+}

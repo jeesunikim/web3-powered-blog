@@ -1,6 +1,6 @@
-import utilStyles from "styles/utils.module.css";
 import shopStyles from "styles/shop.module.css";
 
+import Link from "next/link";
 import BigNumber from "bignumber.js";
 import Head from "next/head";
 import Image from "next/image";
@@ -12,7 +12,8 @@ import products from "data/products.json";
 import { RootState, useAppDispatch } from "store";
 import { sendPayment } from "store/slices/paymentSlice";
 
-import { Layout } from "components/layout";
+import { ConnectWithStellar } from "components/Wallets/ConnectWithStellar";
+import { H3, Paragraph } from "components/Styleguide/Text";
 
 const Shop: React.FC = () => {
   const isPaymentSuccessful = useSelector(
@@ -21,17 +22,22 @@ const Shop: React.FC = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <Layout>
+    <>
       <Head>
-        <title>Digital Planner Shop</title>
+        <title>Digital Shop Store</title>
       </Head>
-      <div className={shopStyles.shopContainer}>
-        <h1 className={utilStyles.headingXl}>Digital Planner Store</h1>
+
+      <div className="grid grid-cols-1 md:grid-cols-2">
+        <h2 className="text-3xl font-serif font-bold md:text-4xl">
+          Digital Store
+        </h2>
+        <ConnectWithStellar />
       </div>
+
       {config.stellarPublicKey ? (
-        <section>
+        <section className="m-5 grid grid-cols-1 gap-y-6 md:gap-y-0 md:grid-cols-2 md:gap-x-4 lg:px-8 lg:py-4">
           {products.map((product) => (
-            <div className={shopStyles.shopProductList} key={product.id}>
+            <div key={product.id}>
               <Image
                 onClick={() => {
                   dispatch(
@@ -46,18 +52,20 @@ const Shop: React.FC = () => {
                 height={323}
                 alt={product.name}
               />
-              <div className={shopStyles.shopProductContent}>
-                <h2>{product.name}</h2>
-                <span>
+              <div>
+                <H3>{product.name}</H3>
+                <span className="md:mx-5">
                   <strong>
                     {product.price.value}
                     {product.price.asset}
                   </strong>
                 </span>
-                <p>{product.description}</p>
-                <div>
+                <Paragraph className="mt-3">{product.description}</Paragraph>
+                <div className="mt-5 mx-5">
                   {isPaymentSuccessful && (
-                    <button>Download Your {product.name}</button>
+                    <button className={shopStyles.shopButton}>
+                      Download Your {product.name}
+                    </button>
                   )}
                 </div>
               </div>
@@ -66,10 +74,41 @@ const Shop: React.FC = () => {
         </section>
       ) : (
         <section>
-          <p>Shop owner has not set her public key</p>
+          <H3 className="mt-8 text-center md:mx-0">
+            TO USE IT, SHOP OWNER NEEDS TO ADD HIS/HER STELLAR PUBLIC KEY AS
+            ENVIRONMENT VARIABLE
+          </H3>
+          <Paragraph className="text-center mb-8 mt-2">
+            MORE INFORMATION{" "}
+            <Link href="https://nextjs.org/docs/basic-features/environment-variables">
+              <a target="_blank" rel="noreferrer">
+                HERE
+              </a>
+            </Link>{" "}
+            ON HOW TO DO IT IN NEXT.JS
+          </Paragraph>
+
+          <Paragraph className="text-center">
+            I was thinking of freelancers in cash economy who offer their
+            products and service to customers all over the world for{" "}
+            <strong>this shop feature</strong>.
+          </Paragraph>
+
+          <Paragraph className="text-center">
+            By using Stellar, they can get paid instantly and can cash out right
+            away from their local moneygram location.
+          </Paragraph>
+          <Paragraph className="text-center semi-bold mt-5">
+            More information on Stellar/Moneygram integration{" "}
+            <Link href="https://stellar.org/moneygram">
+              <a target="_blank" rel="noreferrer">
+                here
+              </a>
+            </Link>
+          </Paragraph>
         </section>
       )}
-    </Layout>
+    </>
   );
 };
 

@@ -17,6 +17,7 @@ import { publicProvider } from "wagmi/providers/public";
 import { store } from "store";
 
 import { RainbowCustomAvatar } from "components/Wallets/RainbowCustomAvatar";
+import { Layout } from "components/layout";
 
 const { chains, provider } = configureChains(
   [chain.mainnet, chain.polygon],
@@ -38,11 +39,18 @@ export default function App({ Component, pageProps }: AppProps) {
       <RainbowKitProvider
         coolMode
         chains={chains}
-        theme={darkTheme()}
+        theme={darkTheme({
+          accentColor: "rgb(30 41 59)",
+          accentColorForeground: "white",
+          borderRadius: "medium",
+          fontStack: "system",
+        })}
         avatar={RainbowCustomAvatar}
       >
         <Provider store={store}>
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </Provider>
       </RainbowKitProvider>
     </WagmiConfig>
